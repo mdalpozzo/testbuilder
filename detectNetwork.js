@@ -9,10 +9,28 @@
 
 var detectNetwork = function(cardNumber) {
   // Note: `cardNumber` will always be a string
-  // The Diner's Club network always starts with a 38 or 39 and is 14 digits long
-  // The American Express network always starts with a 34 or 37 and is 15 digits long
+  cardNumber = cardNumber.split('').map(function(string) {
+    return parseInt(string);
+  });
+  
+  
+  if (JSON.stringify(cardNumber.slice(0, 2)) === (JSON.stringify([3, 8]) || JSON.stringify([3, 9])) && cardNumber.length === 14) {
+    return 'Diner\'s Club';
+  } else if (JSON.stringify(cardNumber.slice(0, 2)) === (JSON.stringify([3, 4]) || JSON.stringify([3, 7])) && cardNumber.length === 15) {
+    return 'American Express';
+  } else {
+    return 'not a valid credit card #'
+  }
 
-  // Once you've read this, go ahead and try to implement this function, then return to the console.
 };
 
 
+function assertEqual(actual, expected, testName) {
+  if (actual === expected) {
+    console.log('PASSED : ' + testName);
+  } else {
+    console.log('FAILED : ' + testName + ', expected: ' + expected + ', but got: ' + actual);
+  }
+}
+
+assertEqual(detectNetwork('343456789012345'), 'American Express', 'detects correct credit network')
