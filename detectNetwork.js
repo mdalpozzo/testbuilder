@@ -40,9 +40,9 @@ var detectNetwork = function(cardNumber) {
     return 'Maestro';
   } else if (parseInt(cardNumber.slice(0, 6).join('')) >= 622126 && parseInt(cardNumber.slice(0, 6).join('')) <= 622925 && [16, 17, 18, 19].indexOf(cardNumber.length > -1)) {
     return 'China UnionPay';  
-  } else if (parseInt(cardNumber.slice(0, 6).join('')) >= 624 && parseInt(cardNumber.slice(0, 6).join('')) <= 626 && [16, 17, 18, 19].indexOf(cardNumber.length > -1)) {
+  } else if (parseInt(cardNumber.slice(0, 3).join('')) >= 624 && parseInt(cardNumber.slice(0, 3).join('')) <= 626 && [16, 17, 18, 19].indexOf(cardNumber.length > -1)) {
     return 'China UnionPay';
-  } else if (parseInt(cardNumber.slice(0, 6).join('')) >= 6282 && parseInt(cardNumber.slice(0, 6).join('')) <= 6288 && [16, 17, 18, 19].indexOf(cardNumber.length > -1)) {
+  } else if (parseInt(cardNumber.slice(0, 4).join('')) >= 6282 && parseInt(cardNumber.slice(0, 4).join('')) <= 6288 && [16, 17, 18, 19].indexOf(cardNumber.length > -1)) {
     return 'China UnionPay';
   } else {
     return 'not a valid credit card #';

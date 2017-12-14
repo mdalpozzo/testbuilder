@@ -137,9 +137,9 @@ describe('China UnionPay', function() {
       (function(length, prefix) {
         var padding = Array(length - 6 + 1).join('1');
 
-        it('has a prefix of ' + prefix + ' and a length of ' + length), function() {
+        it('has a prefix of ' + prefix + ' and a length of ' + length, function() {
           detectNetwork(prefix + padding).should.equal('China UnionPay');
-        }
+        })
       })(length, prefix)
     }
   }
@@ -149,9 +149,9 @@ describe('China UnionPay', function() {
       (function(length, prefix) {
         var padding = Array(length - 3 + 1).join('1');
 
-        it('has a prefix of ' + prefix + ' and a length of ' + length), function() {
+        it('has a prefix of ' + prefix + ' and a length of ' + length, function() {
           detectNetwork(prefix + padding).should.equal('China UnionPay');
-        }
+        })
       })(length, prefix)
     }
   }
@@ -161,9 +161,9 @@ describe('China UnionPay', function() {
       (function(length, prefix) {
         var padding = Array(length - 4 + 1).join('1');
 
-        it('has a prefix of ' + prefix + ' and a length of ' + length), function() {
+        it('has a prefix of ' + prefix + ' and a length of ' + length, function() {
           detectNetwork(prefix + padding).should.equal('China UnionPay');
-        }
+        })
       })(length, prefix)
     }
   }
@@ -178,13 +178,16 @@ describe('Switch', function() {
 
   for (i = 0; i < prefixes.length; i++) {
     for (j = 0; j < lengths.length; j++) {
+      var prefix = prefixes[i];
+      var length = lengths[j];
+
       (function(prefix, length) {
         var padding = Array(length - prefix.length + 1).join('1');
 
-        it('has a prefix of ' + prefix + ' and a length of ' + length), function() {
+        it('has a prefix of ' + prefix + ' and a length of ' + length, function() {
           detectNetwork(prefix + padding).should.equal('Switch');
-        }
-      })(prefixes[i], lengths[j])
+        })
+      })(prefix, length)
     }
   }
 });
