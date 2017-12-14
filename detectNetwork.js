@@ -18,6 +18,8 @@ var detectNetwork = function(cardNumber) {
     return 'Diner\'s Club';
   } else if (JSON.stringify(cardNumber.slice(0, 2)) === JSON.stringify([3, 4]) || JSON.stringify(cardNumber.slice(0, 2)) === JSON.stringify([3, 7]) && cardNumber.length === 15) {
     return 'American Express';
+  } else if (['4903', '4905', '4911', '4936', '6333', '6759'].indexOf(cardNumber.slice(0, 4).join('')) > -1 || ['564182', '633110'].indexOf(cardNumber.slice(0, 6).join('')) > -1 && [16, 18, 19].indexOf(cardNumber.length) > -1) {
+    return 'Switch';
   } else if (JSON.stringify(cardNumber[0]) === '4' && [13, 16, 19].indexOf(cardNumber.length) > -1) {
     return 'Visa';
   } else if (['51', '52', '53', '54', '55'].indexOf(cardNumber.slice(0, 2).join('')) > -1 && cardNumber.length === 16) {
@@ -35,7 +37,13 @@ var detectNetwork = function(cardNumber) {
       return 'Discover';
     }
   } else if (['5018', '5020', '5038', '6304'].indexOf(cardNumber.slice(0, 4).join('')) !== -1 && cardNumber.length <= 19 && cardNumber.length >= 12) {
-      return 'Maestro';
+    return 'Maestro';
+  } else if (parseInt(cardNumber.slice(0, 6).join('')) >= 622126 && parseInt(cardNumber.slice(0, 6).join('')) <= 622925 && [16, 17, 18, 19].indexOf(cardNumber.length > -1)) {
+    return 'China UnionPay';  
+  } else if (parseInt(cardNumber.slice(0, 6).join('')) >= 624 && parseInt(cardNumber.slice(0, 6).join('')) <= 626 && [16, 17, 18, 19].indexOf(cardNumber.length > -1)) {
+    return 'China UnionPay';
+  } else if (parseInt(cardNumber.slice(0, 6).join('')) >= 6282 && parseInt(cardNumber.slice(0, 6).join('')) <= 6288 && [16, 17, 18, 19].indexOf(cardNumber.length > -1)) {
+    return 'China UnionPay';
   } else {
     return 'not a valid credit card #';
   }
