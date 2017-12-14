@@ -97,28 +97,38 @@ describe('Discover', function() {
   }
 
   it('has a prefix of 65 and a length of 16', function() {
-    detectNetwork('651234567890123456').should.equal('Discover');
+    detectNetwork('6512345678901234').should.equal('Discover');
   });
 
   it('has a prefix of 65 and a length of 19', function() {
-    detectNetwork('651234567890123456789').should.equal('Discover');
-  })
-});
-
-describe('Maestro', function() {
-  var prefixes = ['5018', '5020', '5038', '6304'];
-
-  prefixes.map(function(prefix) {
-    for (var l = 12; l <= 19; l++) {
-      var endingNums = Array(l - prefix.length + 1).join('1');
-      (function(length) {
-        it('has a prefix of ' + prefix + ' and a length of ' + l, function() {
-          detectNetwork(prefix + endingNums).should.equal('Maestro')
-        })
-      })(length)
-    }
+    detectNetwork('6512345678901234567').should.equal('Discover');
   });
 });
 
+describe('Maestro', function() {
+  var should = chai.should();
+
+  
+
+    for (var length = 12; length <= 19; length++) {
+
+      (function(length) {
+        var fullNumber = Array(length - 4 + 1).join('1');
+        
+        it('has a prefix of 5018 and a length of ' + length, function() {
+          detectNetwork('5018' + fullNumber).should.equal('Maestro');
+        });
+        it('has a prefix of 5020 and a length of ' + length, function() {
+          detectNetwork('5020' + fullNumber).should.equal('Maestro');
+        })
+        it('has a prefix of 5038 and a length of ' + length, function() {
+          detectNetwork('5038' + fullNumber).should.equal('Maestro');
+        })
+        it('has a prefix of 6304 and a length of ' + length, function() {
+          detectNetwork('6304' + fullNumber).should.equal('Maestro');
+        })
+      })(length)
+    }
+});
 describe('should support China UnionPay')
 describe('should support Switch')

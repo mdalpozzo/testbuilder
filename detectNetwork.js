@@ -31,29 +31,13 @@ var detectNetwork = function(cardNumber) {
       return 'Discover';
     }
   } else if (cardNumber.slice(0, 2).join('') === '65') {
-    if (cardNumber.length === 16 || cardNumber.lenth === 19) {
+    if (cardNumber.length === 16 || cardNumber.length === 19) {
       return 'Discover';
     }
-  } else if (['5018', '5020', '5038', '6304'].indexOf(cardNumber.slice(0, 4).join('')) > -1) {
-    if (cardNumber.length >= 12 && cardNumber.length <= 19) {
+  } else if (['5018', '5020', '5038', '6304'].indexOf(cardNumber.slice(0, 4).join('')) !== -1 && cardNumber.length <= 19 && cardNumber.length >= 12) {
       return 'Maestro';
-    }
   } else {
     return 'not a valid credit card #';
   }
 
 };
-
-
-
-/*
-function assertEqual(actual, expected, testName) {
-  if (actual === expected) {
-    console.log('PASSED : ' + testName);
-  } else {
-    console.log('FAILED : ' + testName + ', expected: ' + expected + ', but got: ' + actual);
-  }
-}
-
-assertEqual(detectNetwork('343456789012345'), 'American Express', 'detects correct credit network')
-*/
